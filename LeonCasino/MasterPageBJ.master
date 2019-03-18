@@ -1,0 +1,24 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageBJ.master.cs" Inherits="MasterPageBJ" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div style= background-image: "http://dallascustompokertables.com/wp-content/themes/jhwebdesigner/slider/imgs/slide-bg.jpg">
+            <div align="center" style="background-color: transparent; background-image: url(http://dallascustompokertables.com/wp-content/themes/jhwebdesigner/slider/imgs/slide-bg.jpg);">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+            <%--<asp:Image ID="Image1" runat="server" ImageUrl="http://9cover.com/images/ccovers/5070be522d161.jpg" />--%>
+            <br />
+            &nbsp;<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
