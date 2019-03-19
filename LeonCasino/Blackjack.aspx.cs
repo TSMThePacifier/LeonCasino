@@ -88,12 +88,12 @@ public partial class Blackjack : System.Web.UI.Page
         SqlCommand com;
         SqlDataReader rs;
 
-        conexion1.AbrirKey();
+        //conexion1.AbrirKey();
 
-        //Connection.conexion.Close();
-        //Connection.conexion.Open();
+        Connection.conexion.Close();
+        Connection.conexion.Open();
         sql = "select " +
-              " CONVERT(int, DecryptByKey(saldo))" +
+              " saldo" +
               ",nombre_usuario " + 
               " from usuario " +
               " WHERE nombre_usuario = '" + usuario + "';";
@@ -111,14 +111,16 @@ public partial class Blackjack : System.Web.UI.Page
             Connection.USUARIO = rs[1].ToString();
 
             rs.Close();
-            conexion1.CerrarKey();
+            Connection.conexion.Close();
+            //conexion1.CerrarKey();
 
-          //  conexion1.UpdateBalance(Connection.BALANCE, Connection.USUARIO);
+            //  conexion1.UpdateBalance(Connection.BALANCE, Connection.USUARIO);
         }
         else
         {
             rs.Close();
-            conexion1.CerrarKey();
+            Connection.conexion.Close();
+            //conexion1.CerrarKey();
             //Connection.conexion.Close();
         }
     }

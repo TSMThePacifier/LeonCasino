@@ -13,7 +13,8 @@ public class Connection
     public static double BALANCE;
     public static string USUARIO ="";
 
-    public static SqlConnection conexion = new SqlConnection("data source=LAPTOP-SD1CS450\\SQLEXPRESS;initial catalog = DBCasino; user id= casinito; password= oracle"); //catalog= bd_demo
+    public static SqlConnection conexion = new SqlConnection("Server=tcp:casinocloud.database.windows.net,1433;Initial Catalog=DBCasinoCloud;Persist Security Info=False;" +
+                                                             "User ID=CloudLogin;Password=Aguacate01;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"); //catalog= bd_demo
 
 
     public Connection()
@@ -68,24 +69,24 @@ public class Connection
         SqlCommand com;
 
         //conexion.Close();
-        //conexion.Open();
+        conexion.Open();
 
-        AbrirKey();
+        //AbrirKey();
 
         sql = "INSERT INTO usuario VALUES( " +
             " '" + usuario + "', " +
-            " EncryptByKey( Key_GUID('SymmetricKey1'), CONVERT(varchar,'" + password + "') ), " +
-            " EncryptByKey( Key_GUID('SymmetricKey1'), (CAST(" + balance + " AS varbinary(MAX))))," +
-            " EncryptByKey(Key_GUID('SymmetricKey1'), CONVERT(varchar, '" + name + "')), " +
-            " EncryptByKey( Key_GUID('SymmetricKey1'), CONVERT(varchar,'" + lastname + "') )," +
-            " EncryptByKey( Key_GUID('SymmetricKey1'), CONVERT(varchar,'" + email + "') ));";
+            " '" + password + "' , " +
+            " " + balance + ", " +
+            " '" + name + "', " +
+            " '" + lastname + "'," +
+            " '" + email + "');";
         com = conexion.CreateCommand();
         com.CommandText = sql;
         com.ExecuteNonQuery();
 
-        CerrarKey();
+        //CerrarKey();
 
-       // conexion.Close();
+        conexion.Close();
     }
 
     public void IngresarHistorial(int codigo, int cartas_usuario, int cartas_casino, double apuesta, string resultado, double ganancia, string usuario)
@@ -108,15 +109,17 @@ public class Connection
         String sql;
         SqlCommand com;
 
-        AbrirKey();
-        
-        sql = "UPDATE usuario SET saldo = EncryptByKey (Key_GUID('SymmetricKey1'),CAST(" + balance + " as varbinary(MAX))) WHERE nombre_usuario = '" + usuario + "';";
+        conexion.Close();
+        conexion.Open();
+        //AbrirKey();
+
+        sql = "UPDATE usuario SET saldo = " + balance + "  WHERE nombre_usuario = '" + usuario + "';";
         com = conexion.CreateCommand();
         com.CommandText = sql;
         com.ExecuteNonQuery();
 
-        CerrarKey();
-
+        //CerrarKey();
+        conexion.Close();
     }
 
     public void IngresarDineroGratis(string usuario)

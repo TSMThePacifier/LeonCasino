@@ -51,16 +51,17 @@ public partial class _RegisterLogin : System.Web.UI.Page
             SqlCommand com;
             SqlDataReader rs;
 
-            conexion1.AbrirKey();
+            //conexion1.AbrirKey();
 
-           // Connection.conexion.Close();
-           // Connection.conexion.Open();
+            Connection.conexion.Close();
+            Connection.conexion.Open();
+
             sql =   "select " +
-                    "CONVERT(int, DecryptByKey(saldo))" + 
+                    "saldo" + 
                     ",nombre_usuario " +
                     "from usuario " +
                     "WHERE nombre_usuario = '" + txtLoginUser.Text + "'" +
-                    "AND (CONVERT(varchar, DecryptByKey(clave)) = '" + txtLoginPassword.Text + "')";
+                    "AND clave = '" + txtLoginPassword.Text + "'";
 
             com = Connection.conexion.CreateCommand();
             com.CommandText = sql;
@@ -75,7 +76,7 @@ public partial class _RegisterLogin : System.Web.UI.Page
                 Connection.USUARIO = rs[1].ToString();
 
                 rs.Close();
-                conexion1.CerrarKey();
+                //conexion1.CerrarKey();
                 //Connection.conexion.Close();
 
                 Response.Redirect("Default.aspx");
@@ -86,7 +87,7 @@ public partial class _RegisterLogin : System.Web.UI.Page
             else
             {
                 rs.Close();
-                conexion1.CerrarKey();
+                //conexion1.CerrarKey();
                 //Connection.conexion.Close();
             }
         }else
