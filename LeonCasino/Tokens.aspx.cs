@@ -44,6 +44,8 @@ public partial class Tokens : System.Web.UI.Page
             Session["balance"] = rs[0];
             Session["usuario"] = rs[1];
 
+            //Si o que
+
             Connection.BALANCE = Convert.ToInt32(rs[0].ToString());
             Connection.USUARIO = rs[1].ToString();
 
