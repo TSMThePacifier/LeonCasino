@@ -1,2 +1,3 @@
+Server: casinocloud.database.windows.net
 UserDB: CloudLogin
-Password: Ulacit2019
+Password: Aguacate01
